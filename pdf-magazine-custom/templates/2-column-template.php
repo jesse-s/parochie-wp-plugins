@@ -39,14 +39,18 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <img src="<?php echo $fields['kolom_1']['kolom_afbeelding']; ?>">
             <?php } ?>
 
+            <?php if ( ! empty( $fields['kolom 1 dikgedrukte inleiding'] ) ) { ?>
+                <p><strong><?php echo $fields['kolom 1 dikgedrukte inleiding']; ?></strong></p>
+            <?php } ?>
+
             <?php echo $fields['kolom_1']['kolom_tekst'] ?? ''; ?>
         </div>
         <div class="column-2-content">
+            <?php echo $fields['kolom_2']['kolom_tekst'] ?? ''; ?>
+
             <?php if ( isset( $fields['kolom_2']['kolom_afbeelding'] ) ) { ?>
                 <img src="<?php echo $fields['kolom_2']['kolom_afbeelding']; ?>">
             <?php } ?>
-
-            <?php echo $fields['kolom_2']['kolom_tekst'] ?? ''; ?>
         </div>
         <div class="break"></div>
     </div>
@@ -54,11 +58,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
 
     <?php if (
-            ! empty( $fields['kolom_3']['kolom_tekst'] ) ||
-            ! empty( $fields['kolom_3']['kolom_afbeelding'] ) ||
-            ! empty( $fields['kolom_4']['kolom_tekst'] ) ||
-            ! empty( $fields['kolom_4']['kolom_afbeelding'] )
-            ) : ?>
+        ! empty( $fields['kolom_3']['kolom_tekst'] ) ||
+        ! empty( $fields['kolom_3']['kolom_afbeelding'] ) ||
+        ! empty( $fields['kolom_4']['kolom_tekst'] ) ||
+        ! empty( $fields['kolom_4']['kolom_afbeelding'] )
+    ) : ?>
         <div class="columns-container new-page">
             <div class="column-1-content">
                 <?php if ( isset( $fields['kolom_3']['kolom_afbeelding'] ) ) { ?>
@@ -68,11 +72,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <?php echo $fields['kolom_3']['kolom_tekst'] ?? ''; ?>
             </div>
             <div class="column-2-content">
+                <?php echo $fields['kolom_4']['kolom_tekst'] ?? ''; ?>
+
                 <?php if ( isset( $fields['kolom_4']['kolom_afbeelding'] ) ) { ?>
                     <img src="<?php echo $fields['kolom_4']['kolom_afbeelding']; ?>">
                 <?php } ?>
-
-                <?php echo $fields['kolom_4']['kolom_tekst'] ?? ''; ?>
             </div>
             <div class="break"></div>
         </div>

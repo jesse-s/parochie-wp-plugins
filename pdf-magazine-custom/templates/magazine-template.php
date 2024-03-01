@@ -83,7 +83,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     strong, b {
         font-weight: 700;
     }
-    
+
     p {
       margin: 0 0 15px;
       line-height: 17px;
@@ -428,6 +428,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     .page-column.is-column .text-container {
         margin-top: 35px;
+    }
+    .page-column.is-column .gallery-image img {
+        max-height: 250px;
     }
 
     .page-column .page-footer {

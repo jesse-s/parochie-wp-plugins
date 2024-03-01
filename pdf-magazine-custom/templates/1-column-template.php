@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php echo $post_image; ?>
                 </div>
             </div>
-        <?php else : ?>
+        <?php elseif ( ! empty ( $post_image_url ) ) : ?>
             <div class="gallery">
                 <div class="gallery-image">
                     <img src="<?php echo $post_image_url; ?>">
@@ -53,8 +53,30 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php endif; ?>
     <?php } ?>
 
+    <?php if ( ! empty( $fields['Afbeelding'] ) ) { ?>
+        <div class="gallery">
+            <div class="gallery-image">
+                <img src="<?php echo $fields['Afbeelding']['url']; ?>">
+            </div>
+        </div>
+    <?php } ?>
+
     <?php if ( ! empty( $post_excerpt ) && $post_category !== 'column' ) { ?>
         <p><strong><?php echo $post_excerpt; ?></strong></p>
+    <?php } ?>
+
+    <?php if ( ! empty( $fields['dikgedrukte inleiding'] ) && $post_category !== 'column' ) { ?>
+        <p><strong><?php echo $fields['dikgedrukte inleiding']; ?></strong></p>
+    <?php } ?>
+
+    <?php if ( ! isset( $post_background ) ) : ?>
+        <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php endif; ?>
+
+    <?php if ( ! empty( $fields['Column tekst'] ) ) { ?>
+        <div class="text-container">
+            <p><?php echo $fields['Column tekst']; ?></p>
+        </div>
     <?php } ?>
 
     <?php if ( ! isset( $post_background ) ) : ?>
