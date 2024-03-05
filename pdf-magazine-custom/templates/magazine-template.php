@@ -431,6 +431,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     }
     .page-column.is-column .gallery-image img {
         max-height: 250px;
+        max-width: 480px;
     }
 
     .page-column .page-footer {
