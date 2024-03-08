@@ -111,6 +111,9 @@ foreach ( $index_categories as $slug => $category ) {
             <?php
             $bijdragen_text = get_field( 'ook_jij_kunt_bijdragen!', $colofon_acf_post_id );
 
+            // Make sure the email address in the text has a space after the @, if it doesn't already
+            $bijdragen_text = preg_replace('/([A-z0-9._-]+)@([A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/', '$1@ $2$3', $bijdragen_text);
+
             // Place the mailto link in the text
             $mail_pattern = '/([A-z0-9._-]+@\s?[A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/';
             $bijdragen_text_mailto = preg_replace($mail_pattern, '<a href="mailto:$1$2">$1$2</a>', $bijdragen_text);
