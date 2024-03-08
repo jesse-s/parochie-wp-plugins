@@ -4,7 +4,30 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$colofon_acf_post_id = 29230;
+// Find post ID by slugs: colofon, $download_year . '-blad-' . $download_quarter
+$index_post_query = new WP_Query( [
+    /*'date_query' => [
+        'after' => $after_date->format( 'Y-m-d H:i:s' ),
+        'before' => $before_date->format( 'Y-m-d H:i:s' ),
+    ],*/
+    'orderby' => 'post_date',
+    'order' => 'DESC',
+    'post_type' => 'parochieblad',
+    'offset' => 0,
+    'posts_per_page' => 99999,
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'parochieblad_category',
+            'field' => 'slug',
+            'terms' => array( $download_year . '-blad-' . $download_quarter, 'colofon' ),
+            'operator' => 'AND',
+        )
+    )
+] );
+
+if (isset($index_post_query->posts[0])) {
+    $colofon_acf_post_id = $index_post_query->posts[0]->ID;
+}
 
 // Calculate index height to know when to break to the second column. FML
 $index_category_columns = [[], []];
@@ -53,7 +76,7 @@ foreach ( $index_categories as $slug => $category ) {
                             <a href="#<?php echo $article['id']; ?>" class="index-category-article"><?php echo $article['title']; ?></a>
                         <?php endforeach; ?>
                     </div>
-                <?php $i++; endforeach; ?>
+                    <?php $i++; endforeach; ?>
             </div>
         <?php endforeach; ?>
 
@@ -67,6 +90,7 @@ foreach ( $index_categories as $slug => $category ) {
             </div>
         </div>
 
+        <?php if ( isset( $colofon_acf_post_id ) ) : ?>
         <div class="index-colofon-block">
             <div class="index-colofon-subheader">
                 Redactie
@@ -84,17 +108,16 @@ foreach ( $index_categories as $slug => $category ) {
                 Ook jij kunt bijdragen!
             </div>
 
-
             <?php
-                $bijdragen_text = get_field('ook_jij_kunt_bijdragen!', $colofon_acf_post_id);
+            $bijdragen_text = get_field( 'ook_jij_kunt_bijdragen!', $colofon_acf_post_id );
 
-                // Place the mailto link in the text
-                $mail_pattern = '/([A-z0-9._-]+@\s?[A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/';
-                $bijdragen_text_mailto = preg_replace($mail_pattern, '<a href="mailto:$1$2">$1$2</a>', $bijdragen_text);
+            // Place the mailto link in the text
+            $mail_pattern = '/([A-z0-9._-]+@\s?[A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/';
+            $bijdragen_text_mailto = preg_replace($mail_pattern, '<a href="mailto:$1$2">$1$2</a>', $bijdragen_text);
 
-                // Remove the space in the email address in the mailto: section
-                $mailto_pattern = '/mailto:([A-z0-9._-]+)@\s?([A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/';
-                echo preg_replace($mailto_pattern, 'mailto:$1@$2$3', $bijdragen_text_mailto);
+            // Remove the space in the email address in the mailto: section
+            $mailto_pattern = '/mailto:([A-z0-9._-]+)@\s?([A-z0-9_-]+\.)([A-z0-9_\-.]{1,}[A-z])/';
+            echo preg_replace($mailto_pattern, 'mailto:$1@$2$3', $bijdragen_text_mailto);
             ?>
             <!--
             Stuur je kopij naar <a href="mailto:parochieblad@lievevrouweparochie.nl">parochieblad@<br>lievevrouweparochie.nl</a>
@@ -103,7 +126,7 @@ foreach ( $index_categories as $slug => $category ) {
 
         <div class="index-colofon-block">
             Deadline volgende uitgave:<br>
-            <?php echo get_field('aanlever-deadline_volgende_uitgave', $colofon_acf_post_id); ?><br>
+            <?php echo get_field( 'aanlever-deadline_volgende_uitgave', $colofon_acf_post_id ); ?><br>
             De redactie beslist over de plaatsing.
         </div>
 
@@ -112,13 +135,13 @@ foreach ( $index_categories as $slug => $category ) {
                 Foto voorpagina
             </div>
 
-
-            <?php foreach ( get_field('fotograaf_foto_voorpagina', $colofon_acf_post_id) as $photographer ) : ?>
+            <?php foreach ( get_field( 'fotograaf_foto_voorpagina', $colofon_acf_post_id ) as $photographer ) : ?>
                 <div>
                     <?php echo $photographer; ?>
                 </div>
             <?php endforeach; ?>
         </div>
+        <?php endif; ?>
     </div>
 
     <footer class="page-footer">

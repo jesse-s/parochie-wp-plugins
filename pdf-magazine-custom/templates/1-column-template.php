@@ -17,25 +17,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <div class="column-header"><?php echo $post_title; ?></div>
 
-    <?php if ( isset( $fields['schrijver_' . $post_category] ) && count( $fields['schrijver_' . $post_category] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_' . $post_category][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_vanuit_de_geloofsgemeenschap'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_vanuit_de_geloofsgemeenschap'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_ familieberichten'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_ familieberichten'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_van_het_parochiebestuur'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_van_het_parochiebestuur'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_ verdieping'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_ verdieping'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijverr_van_het_pastoraal_team'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijverr_van_het_pastoraal_team'][0]; ?></div>
-    <?php endif; ?>
+    <?php foreach ( $fields as $key => $field ) : ?>
+        <?php if ( strpos( $key, 'schrijver_' ) !== false && isset( $field[0] ) ) : ?>
+            <div class="author">Door <?php echo $field[0]; ?></div>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
     <?php if ( ! empty( $post_image ) ) { ?>
         <?php if ( ! isset( $post_background ) ) : ?>
@@ -53,13 +45,15 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php endif; ?>
     <?php } ?>
 
-    <?php if ( ! empty( $fields['Afbeelding'] ) ) { ?>
-        <div class="gallery">
-            <div class="gallery-image">
-                <img src="<?php echo $fields['Afbeelding']['url']; ?>">
+    <?php foreach ( $fields as $key => $field ) : ?>
+        <?php if ( strpos( $key, 'afbeelding_' ) !== false && is_array( $field ) && isset( $field['url'] ) ) : ?>
+            <div class="gallery">
+                <div class="gallery-image">
+                    <img src="<?php echo $field['url']; ?>">
+                </div>
             </div>
-        </div>
-    <?php } ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
     <?php if ( ! empty( $post_excerpt ) && $post_category !== 'column' ) { ?>
         <p><strong><?php echo $post_excerpt; ?></strong></p>
@@ -71,16 +65,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
-    <?php if ( ! empty( $fields['Column tekst'] ) ) { ?>
+    <?php if ( ! empty( $fields['column_tekst'] ) ) { ?>
         <div class="text-container">
-            <p><?php echo $fields['Column tekst']; ?></p>
+            <p><?php echo $fields['column_tekst']; ?></p>
         </div>
     <?php } ?>
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( ! empty( $fields['tussenkop_1'] ) || ! empty( $fields['alinea_tekst_1'] ) ) { ?>
@@ -101,6 +99,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( ! empty( $fields['tussenkop_2'] ) || ! empty( $fields['alinea_tekst_2'] ) ) { ?>
@@ -121,6 +121,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( ! empty( $fields['tussenkop_3'] ) || ! empty( $fields['alinea_tekst_3'] ) ) { ?>
@@ -141,6 +143,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( ! empty( $fields['tussenkop_4'] ) || ! empty( $fields['alinea_tekst_4'] ) ) { ?>
@@ -161,6 +165,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( isset( $fields['serie_afbeeldingen'] ) && count( $fields['serie_afbeeldingen'] ) ) { ?>
@@ -177,6 +183,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if ( ! isset( $post_background ) ) : ?>
         <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
+    <?php else : ?>
+        <div class="page-background-color"></div>
     <?php endif; ?>
 
     <?php if ( ! isset( $post_background ) ) : ?>

@@ -125,6 +125,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         page-break-after: auto;
     }
 
+    .page-background-color,
     .page-background-image {
         position: fixed;
         top: -30px;
@@ -134,8 +135,14 @@ if ( ! defined( 'ABSPATH' ) ) {
         z-index: -1;
     }
 
+    .page-background-color {
+        z-index: -2;
+    }
+
     .gallery {
+        position: relative;
         margin-bottom: 15px;
+        z-index: 1;
     }
     .gallery img {
         max-height: 700px;
@@ -155,7 +162,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     }
 
     .text-container {
+        position: relative;
         margin-bottom: 15px;
+        z-index: 1;
     }
     .text-container h3 {
         margin-top: 0;
@@ -496,14 +505,26 @@ if ( ! defined( 'ABSPATH' ) ) {
         background: none;
     }
 
+    .page.is-voor-kinderen .page-background-color {
+        background-color: #00A000;
+    }
     .page.is-voor-kinderen .column-side-title {
         top: 250px;
+    }
+    .page.is-column .page-background-color {
+        background-color: #424CC1;
     }
     .page.is-column .column-side-title {
         top: 280px;
     }
+    .page.is-bezinning .page-background-color {
+        background-color: #A04201;
+    }
     .page.is-bezinning .column-side-title {
         top: 280px;
+    }
+    .page.is-voorwoord .page-background-color {
+        background-color: #00779C;
     }
     .page.is-voorwoord .column-side-title {
         top: 280px;
