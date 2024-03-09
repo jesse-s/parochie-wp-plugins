@@ -17,21 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <div class="pdf-side pdf-left" style="background-color: <?php echo $post_color; ?>;"></div>
 
-    <?php if ( isset( $fields['schrijver_' . $post_category] ) && count( $fields['schrijver_' . $post_category] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_' . $post_category][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_vanuit_de_geloofsgemeenschap'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_vanuit_de_geloofsgemeenschap'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_ familieberichten'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_ familieberichten'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_van_het_parochiebestuur'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_van_het_parochiebestuur'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijver_ verdieping'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijver_ verdieping'][0]; ?></div>
-    <?php elseif ( isset( $fields['schrijverr_van_het_pastoraal_team'][0] ) ) : ?>
-        <div class="author">Door <?php echo $fields['schrijverr_van_het_pastoraal_team'][0]; ?></div>
-    <?php endif; ?>
+    <?php foreach ( $fields as $key => $field ) : ?>
+        <?php if ( strpos( $key, 'schrijver_' ) !== false && isset( $field[0] ) ) : ?>
+            <div class="author">Door <?php echo $field[0]; ?></div>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
     <div class="columns-container">
         <div class="column-1-content">
