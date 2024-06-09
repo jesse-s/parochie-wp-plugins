@@ -193,7 +193,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="page-footer-image">
                 <img src="<?php echo MAGAZINE_PLUGIN_URL . 'images/magnificat_logo_small.png'; ?>" width="50" height="50">
             </div>
-            <div class="page-footer-text">Magnificat <?php echo $download_month; ?> <?php echo $download_year; ?></div>
+            <div class="page-footer-text">Magnificat <?php echo $download_quarter; ?> <?php echo $download_year; ?></div>
         </footer>
     <?php endif; ?>
 </div>

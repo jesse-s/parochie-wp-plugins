@@ -148,6 +148,6 @@ foreach ( $index_categories as $slug => $category ) {
     </div>
 
     <footer class="page-footer">
-        Magnificat <?php echo $download_month; ?> <?php echo $download_year; ?>
+        Magnificat <?php echo $download_quarter; ?> <?php echo $download_year; ?>
     </footer>
 </div>
