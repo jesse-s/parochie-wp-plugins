@@ -178,14 +178,18 @@ while ( $posts_query->have_posts() ) {
         $head_article_title = get_the_title();
     }
     // Front titles
-    if (in_array( 'titel-op-de-voorpagina', $category_slugs )) {
+    if ( in_array( 'titel-op-de-voorpagina', $category_slugs )) {
+        $current_title = get_the_title();
+
         // Find column titles
         if ( in_array( 'column', $category_slugs ) ) {
             $front_column_titles[] = get_the_title();
         }
-        // Find article titles
+        // Find article titles (but skip if already added as column)
         if ( in_array( '1-kolom', $category_slugs ) || in_array( '2-kolommen', $category_slugs ) ) {
-            $front_article_titles[] = get_the_title();
+            if ( ! in_array( $current_title, $front_column_titles ) ) {
+                $front_article_titles[] = get_the_title();
+            }
         }
     }
 
